@@ -9,6 +9,9 @@ const startButton = document.getElementById('start')! as HTMLButtonElement
 const stopButton = document.getElementById('stop')! as HTMLButtonElement
 const resetButton = document.getElementById('reset')! as HTMLButtonElement
 
+const templateSelect = document.getElementById('template')! as HTMLSelectElement
+const setTemplateButton = document.getElementById('set-template')! as HTMLButtonElement
+
 /** セルの状態を保持する配列。 */
 const cells: boolean[] = []
 
@@ -22,8 +25,8 @@ function setBoardSize (width: number, height: number): void {
   cells.splice(0)
   removeChildren('board')
   boardDiv.style.display = 'grid'
-  boardDiv.style.gridTemplateColumns = `repeat(${width}, 15px)`
-  boardDiv.style.gridTemplateRows = `repeat(${height}, 15px)`
+  boardDiv.style.gridTemplateColumns = `repeat(${width}, 10px)`
+  boardDiv.style.gridTemplateRows = `repeat(${height}, 10px)`
   for (let i = 0; i < width * height; i++) {
     cells.push(false)
     const cell = document.createElement('div')
@@ -38,6 +41,15 @@ function setBoardSize (width: number, height: number): void {
         cell.classList.add('alive')
         cells[i] = true
       }
+      // -----
+      const idxes = []
+      for (let i = 0; i < cells.length; i++) {
+        if (cells[i]) {
+          idxes.push(i)
+        }
+      }
+      console.log(idxes)
+      // -----
     })
     boardDiv.appendChild(cell)
   }
@@ -145,5 +157,32 @@ function checkAlive (position: number): boolean {
   }
   return false
 }
+
+const templates: Record<string, number[]> = {
+  'space-ship': [203, 206, 257, 303, 307, 354, 355, 356, 357],
+  glider: [154, 205, 253, 254, 255],
+  'glider-gun': [26, 74, 76, 114, 115, 122, 123, 136, 137, 163, 167, 172, 173, 186, 187, 202, 203, 212, 218, 222, 223, 252, 253, 262, 266, 268, 269, 274, 276, 312, 318, 326, 363, 367, 414, 415],
+  'straight-line': [305, 306, 307, 308, 309, 310, 311, 312, 313, 314],
+  'queen-bee': [267, 316, 317, 365, 366, 371, 372, 405, 406, 414, 415, 416, 421, 422, 425, 426, 455, 456, 465, 466, 471, 472, 475, 476, 516, 517, 567],
+  galaxy: [256, 257, 258, 259, 260, 261, 263, 264, 306, 307, 308, 309, 310, 311, 313, 314, 363, 364, 406, 407, 413, 414, 456, 457, 463, 464, 506, 507, 513, 514, 556, 557, 606, 607, 609, 610, 611, 612, 613, 614, 656, 657, 659, 660, 661, 662, 663, 664],
+  pulsar: [154, 160, 203, 204, 205, 209, 210, 211, 252, 253, 255, 256, 258, 259, 261, 262, 303, 304, 305, 309, 310, 311, 354, 360, 454, 460, 503, 504, 505, 509, 510, 511, 552, 553, 555, 556, 558, 559, 561, 562, 603, 604, 605, 609, 610, 611, 654, 660],
+  'penta-decathlon': [255, 260, 304, 305, 310, 311, 355, 360]
+}
+
+setTemplateButton.addEventListener('click', () => {
+  const templateValue = templateSelect.value
+  if (templateValue === 'none') {
+    return
+  }
+  const templateCells = templates[templateValue]
+  removeChildren('board')
+  cells.splice(0)
+  setBoardSize(WIDTH, HEIGHT)
+  for (const cell of templateCells) {
+    const cellElement = document.querySelector(`[data-position="${cell}"]`)!
+    cellElement.classList.add('alive')
+    cells[cell] = true
+  }
+})
 
 /* eslint-enable @typescript-eslint/no-non-null-assertion */

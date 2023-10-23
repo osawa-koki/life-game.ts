@@ -14,4 +14,16 @@ html(lang="ja")
         button#start Start
         button#stop Stop
         button#reset Reset
+      div
+        select#template
+          option(value="none") テンプレートを選択
+          option(value="space-ship") 宇宙船
+          option(value="glider") グライダー
+          option(value="glider-gun") グライダーガン
+          option(value="straight-line") 直線
+          option(value="queen-bee") 女王蜂
+          option(value="galaxy") 銀河
+          option(value="pulsar") パルサー
+          option(value="penta-decathlon") ペンタデカスロン
+        button#set-template Set
     script(type="module", src="./index.js")
