@@ -25,8 +25,8 @@ function setBoardSize (width: number, height: number): void {
   cells.splice(0)
   removeChildren('board')
   boardDiv.style.display = 'grid'
-  boardDiv.style.gridTemplateColumns = `repeat(${width}, 15px)`
-  boardDiv.style.gridTemplateRows = `repeat(${height}, 15px)`
+  boardDiv.style.gridTemplateColumns = `repeat(${width}, 10px)`
+  boardDiv.style.gridTemplateRows = `repeat(${height}, 10px)`
   for (let i = 0; i < width * height; i++) {
     cells.push(false)
     const cell = document.createElement('div')
@@ -41,6 +41,15 @@ function setBoardSize (width: number, height: number): void {
         cell.classList.add('alive')
         cells[i] = true
       }
+      // -----
+      const idxes = []
+      for (let i = 0; i < cells.length; i++) {
+        if (cells[i]) {
+          idxes.push(i)
+        }
+      }
+      console.log(idxes)
+      // -----
     })
     boardDiv.appendChild(cell)
   }
@@ -150,7 +159,10 @@ function checkAlive (position: number): boolean {
 }
 
 const templates: Record<string, number[]> = {
-  glider: []
+  'space-ship': [203, 206, 257, 303, 307, 354, 355, 356, 357],
+  glider: [154, 205, 253, 254, 255],
+  'glider-gun': [26, 74, 76, 114, 115, 122, 123, 136, 137, 163, 167, 172, 173, 186, 187, 202, 203, 212, 218, 222, 223, 252, 253, 262, 266, 268, 269, 274, 276, 312, 318, 326, 363, 367, 414, 415],
+  'straight-line': [305, 306, 307, 308, 309, 310, 311, 312, 313, 314]
 }
 
 setTemplateButton.addEventListener('click', () => {
@@ -160,8 +172,8 @@ setTemplateButton.addEventListener('click', () => {
   }
   const templateCells = templates[templateValue]
   removeChildren('board')
-  setBoardSize(WIDTH, HEIGHT)
   cells.splice(0)
+  setBoardSize(WIDTH, HEIGHT)
   for (const cell of templateCells) {
     const cellElement = document.querySelector(`[data-position="${cell}"]`)!
     cellElement.classList.add('alive')
