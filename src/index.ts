@@ -9,6 +9,9 @@ const startButton = document.getElementById('start')! as HTMLButtonElement
 const stopButton = document.getElementById('stop')! as HTMLButtonElement
 const resetButton = document.getElementById('reset')! as HTMLButtonElement
 
+const templateSelect = document.getElementById('template')! as HTMLSelectElement
+const setTemplateButton = document.getElementById('set-template')! as HTMLButtonElement
+
 /** セルの状態を保持する配列。 */
 const cells: boolean[] = []
 
@@ -145,5 +148,25 @@ function checkAlive (position: number): boolean {
   }
   return false
 }
+
+const templates: Record<string, number[]> = {
+  glider: []
+}
+
+setTemplateButton.addEventListener('click', () => {
+  const templateValue = templateSelect.value
+  if (templateValue === 'none') {
+    return
+  }
+  const templateCells = templates[templateValue]
+  removeChildren('board')
+  setBoardSize(WIDTH, HEIGHT)
+  cells.splice(0)
+  for (const cell of templateCells) {
+    const cellElement = document.querySelector(`[data-position="${cell}"]`)!
+    cellElement.classList.add('alive')
+    cells[cell] = true
+  }
+})
 
 /* eslint-enable @typescript-eslint/no-non-null-assertion */
