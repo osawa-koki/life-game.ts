@@ -1,4 +1,3 @@
-
-export function hello(): void {
+export function hello (): void {
   console.log('Hello world!')
 }
