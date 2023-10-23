@@ -14,9 +14,7 @@
   "scripts": {
     "build": "tsc"
   },
-  "dependencies": {
-    "@primer/css": "^21.0.9"
-  },
+  "dependencies": {},
   "devDependencies": {
     "typescript": "^5.2.2"
   }
