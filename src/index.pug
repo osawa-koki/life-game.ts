@@ -4,7 +4,14 @@ html(lang="ja")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel="shortcut icon", href="./tako.png", type="image/x-icon")
     link(rel="stylesheet", href="https://unpkg.com/@primer/css@^20.2.4/dist/primer.css")
+    link(rel="stylesheet", href="./style.css")
     title life-game.ts
   body
     h1 life-game.ts
+    main
+      div#board
+      div
+        button#start Start
+        button#stop Stop
+        button#reset Reset
     script(type="module", src="./index.js")
