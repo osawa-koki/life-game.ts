@@ -9,8 +9,15 @@ const startButton = document.getElementById('start')! as HTMLButtonElement
 const stopButton = document.getElementById('stop')! as HTMLButtonElement
 const resetButton = document.getElementById('reset')! as HTMLButtonElement
 
+/** セルの状態を保持する配列。 */
 const cells: boolean[] = []
 
+/**
+ * ボードの初期化(リセット)を行います。
+ * @param width - ボードの幅。
+ * @param height - ボードの高さ。
+ * @returns void - なし。
+ */
 function setBoardSize (width: number, height: number): void {
   cells.splice(0)
   removeChildren('board')
@@ -61,6 +68,11 @@ resetButton.addEventListener('click', () => {
   setBoardSize(WIDTH, HEIGHT)
 })
 
+/**
+ * ライフゲームを開始します。
+ * @global cells - セルの状態を保持する配列。
+ * @returns Promise<void> - ライフゲームの開始を表すPromise。
+ */
 async function start (): Promise<void> {
   // ライフゲームの開始
   while (startButton.disabled) {
@@ -81,8 +93,13 @@ async function start (): Promise<void> {
   }
 }
 
+/**
+ * 指定した位置のセルが生きているかどうかを返します。
+ * @global cells - セルの状態を保持する配列。
+ * @param position - セルの位置。
+ * @returns boolean - 生きているかどうか。
+ */
 function checkAlive (position: number): boolean {
-  // 指定した位置のセルが生きているかどうかを返す
   let aliveCount = 0
   const x = position % WIDTH
   const y = Math.floor(position / WIDTH)
