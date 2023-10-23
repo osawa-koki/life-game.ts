@@ -1,0 +1,21 @@
+{
+  "name": "life-game.ts",
+  "version": "1.0.0",
+  "description": "👖👖👖 LifeGameをTypeScriptで実装してみる！",
+  "repository": "https://github.com/osawa-koki/life-game.ts.git",
+  "author": "osawa-koki <koki@osawa.dev>",
+  "license": "Apache-2.0",
+  "private": false,
+  "engines": {
+    "node": ">=20.0.0",
+    "yarn": ">=1.22.0"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
