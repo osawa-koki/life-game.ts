@@ -1,3 +1,3 @@
-import { hello } from "./functions.js"
+import { hello } from './functions.js'
 
 hello()
