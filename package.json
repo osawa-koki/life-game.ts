@@ -12,9 +12,11 @@
   },
   "type": "module",
   "scripts": {
-    "build:ts": "tsc",
+    "build": "yarn build:html && yarn build:ts",
     "build:html": "pug ./src/",
-    "lint": "eslint ./src/ --ext .ts"
+    "build:ts": "tsc",
+    "lint": "eslint ./src/ --ext .ts",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "eslint": "^8.0.1",
