@@ -12,6 +12,7 @@
   },
   "type": "module",
   "scripts": {
+    "dev": "yarn build && http-server ./src/ -c1",
     "build": "yarn build:html && yarn build:ts",
     "build:html": "pug ./src/",
     "build:ts": "tsc",
@@ -28,6 +29,7 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
     "eslint-plugin-promise": "^6.0.0",
+    "http-server": "^14.1.1",
     "typescript": "*"
   }
 }
