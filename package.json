@@ -20,7 +20,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "eslint": "^8.0.1",
+    "eslint": "^8.53.0",
     "pug-cli": "^1.0.0-alpha6"
   },
   "devDependencies": {
